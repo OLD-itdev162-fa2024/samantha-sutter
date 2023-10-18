@@ -1,21 +1,24 @@
-using System; 
-using System.Collections.Generic; 
-using System.Linq; 
-using System.Threading.Tasks; 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Domain;
-using Microsoft.EntityFrameworkCore; 
+using Microsoft.EntityFrameworkCore;
 
-namespace Persistence 
-{ 
-    public class DataContext: DbContext 
-    {  
-        public DbSet<WeatherForecast> WeatherForecasts { get; set; } 
-        public string DbPath { get; } 
+namespace Persistence
+{
+    public class DataContext: DbContext
+    {
+        public DbSet<WeatherForecast> WeatherForecasts { get; set;}
 
-        public DataContext() 
-        { 
-            var folder = Environment.SpecialFolder.LocalApplicationData; 
-            var path = Environment.GetFolderPath(folder); 
+        public DbSet<Post> Posts { get; set; }
+
+        public string DbPath { get; }
+
+        public DataContext()
+        {
+            var folder = Environment.SpecialFolder.LocalApplicationData;
+            var path = Environment.GetFolderPath(folder);
             DbPath = System.IO.Path.Join(path, "BlogBox.db");
         }
 
@@ -23,7 +26,5 @@ namespace Persistence
         {
             options.UseSqlite($"Data Source={DbPath}");
         }
-
     }
-
 }
